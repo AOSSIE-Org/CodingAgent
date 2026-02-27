@@ -12,7 +12,7 @@
 <!-- Organization Name -->
 <div align="center">
 
-[![Static Badge](https://img.shields.io/badge/aossie.org/TODO-228B22?style=for-the-badge&labelColor=FFC517)](https://TODO.aossie.org/)
+[![Static Badge](https://img.shields.io/badge/aossie.org/TODO-228B22?style=for-the-badge&labelColor=FFC517)](https://github.com/AOSSIE-Org/CodingAgent)
 
 <!-- Correct deployed url to be added -->
 
@@ -48,202 +48,134 @@
 ---
 
 <div align="center">
-<h1>TODO: Project Name</h1>
+<h1>CodingAgent</h1>
 </div>
 
-[TODO](https://TODO.stability.nexus/) is a ... TODO: Project Description.
+[CodingAgent](https://github.com/AOSSIE-Org/CodingAgent) is an open-source, CLI-based AI coding agent that works like the best closed-source tools — Claude Code, Codex, and Antigravity — but without the vendor lock-in. It supports any LLM (cloud or local), persists memory across sessions, integrates natively with Git and MCP servers, and stays lightweight enough for real engineering workflows.
+
 
 ---
 
 ## 🚀 Features
 
-TODO: List your main features here:
-
-- **Feature 1**: Description
-- **Feature 2**: Description
-- **Feature 3**: Description
-- **Feature 4**: Description
+- **Model Agnostic LLM Support**: Works with any LLM out of the box — Claude, GPT, Gemini, Ollama local models, Kimi — switched via a single config line with no code changes required.
+- **Persistent Multi-Tier Memory**: Three-tier memory system (short-term buffer, long-term local vector store, per-project `AGENT.md` scratchpad) that survives session resets and context limits — the agent remembers decisions, patterns, and past bugs.
+- **Reliable Agent Loop with File & Shell Tools**: A clean goal → plan → execute → observe loop with native file read/write, shell command execution, and automatic error recovery — no bloated orchestration framework, just a tight and predictable core loop.
+- **MCP Integration**: First-class Model Context Protocol support so users can plug in GitHub, databases, documentation, or any custom tool server via a simple config entry — no core code changes needed.
+- **Optimised Context & File Caching**: Files already read in a session are cached and not re-fetched unless modified — drastically cuts token usage and API costs across long sessions.
+- **User-Editable Prompt Profile**: A simple `profile.md` where users describe their tech stack, coding style, and preferences — the agent reads this on every session startup and codes exactly the way you like.
+- **Git Integration**: Native Git awareness — reads commit history and diffs so the agent understands what changed recently and makes smarter, context-aware suggestions over time.
+- **Commit-Level Code Review**: On-demand security and quality review for any commit or staged diff — lists vulnerabilities, code smells, and risky changes as a clean CLI report when explicitly asked.
 
 ---
 
 ## 💻 Tech Stack
 
-TODO: Update based on your project
-
-### Frontend
-- React / Next.js / Flutter / React Native
+### CLI & Runtime
 - TypeScript
-- TailwindCSS
+- Commander.js (argument parsing)
+- Inquirer (interactive terminal prompts)
 
-### Backend
-- Flask / FastAPI / Node.js / Supabase
-- Database: PostgreSQL / SQLite / MongoDB
+### Backend / Core Agent
+- Node.js
+- Execa (safe async shell execution)
+- Ripgrep + Glob (fast codebase file navigation)
+- Simple Git (native Git integration — diffs, history, commits)
 
-### AI/ML (if applicable)
-- LangChain / LangGraph / LlamaIndex
-- Google Gemini / OpenAI / Anthropic Claude
-- Vector Database: Weaviate / Pinecone / Chroma
-- RAG / Prompt Engineering / Agent Frameworks
+### Database & Memory
+- SQLite (local persistent storage, zero external services)
+- sqlite-vec (vector search extension for semantic memory)
+- In-memory JSON ring buffer (short-term session context)
 
-### Blockchain (if applicable)
-- Solidity / solana / cardano / ergo Smart Contracts
-- Hardhat / Truffle / foundry
-- Web3.js / Ethers.js / Wagmi
-- OpenZeppelin / alchemy / Infura
+### AI/ML
+- Vercel AI SDK (provider-agnostic LLM routing)
+- Google Gemini / OpenAI GPT / Anthropic Claude / Ollama / Kimi
+- Model Context Protocol SDK (MCP tool + server connections)
+- Custom token budget manager + auto-compaction engine
+- RAG over local codebase / user prompt profile engineering
+
+### Tooling & Build
+- tsup (TypeScript bundler)
+- tsx (zero-config TypeScript dev runner)
+- Vitest (unit and integration testing)
+- ESLint + Prettier (code quality and formatting)
+- SWE-bench (agent performance benchmarking)
 
 ---
 
 ## ✅ Project Checklist
 
-TODO: Complete applicable items based on your project type
+- [ ] **The CLI Agent (core)**:
+   - [ ] Agent loop (goal → plan → execute → observe) is implemented and documented.
+   - [ ] Works end-to-end with at least one local model (Ollama) and one cloud model (Claude/GPT).
+   - [ ] Installable via `npx codingagent` with zero manual setup.
 
-- [ ] **The protocol** (if applicable):
-   - [ ] has been described and formally specified in a paper.
-   - [ ] has had its main properties mathematically proven.
-   - [ ] has been formally verified.
-- [ ] **The smart contracts** (if applicable):
-   - [ ] were thoroughly reviewed by at least two knights of The Stable Order.
-   - [ ] were deployed to: [Add deployment details]
-- [ ] **The mobile app** (if applicable):
-   - [ ] has an _About_ page containing the Stability Nexus's logo and pointing to the social media accounts of the Stability Nexus.
-   - [ ] is available for download as a release in this repo.
-   - [ ] is available in the relevant app stores.
-- [ ] **The AI/ML components** (if applicable):
-   - [ ] LLM/model selection and configuration are documented.
-   - [ ] Prompts and system instructions are version-controlled.
-   - [ ] Content safety and moderation mechanisms are implemented.
-   - [ ] API keys and rate limits are properly managed.
+- [ ] **Multi-LLM Support**:
+   - [ ] Provider-agnostic LLM routing implemented and tested across Claude, OpenAI, Gemini, and Ollama.
+   - [ ] Model switching works via single config change with no code modification.
+   - [ ] Streaming responses work correctly across all supported providers.
+
+- [ ] **Memory System**:
+   - [ ] Short-term in-session buffer implemented with token cap.
+   - [ ] Long-term SQLite vector store persists across sessions.
+   - [ ] Per-project `AGENT.md` scratchpad is read and written by the agent automatically.
+   - [ ] File caching prevents re-reading unchanged files within a session.
+
+- [ ] **Context & Cost Optimisation**:
+   - [ ] Token budget manager tracks and allocates context per turn.
+   - [ ] Auto-compaction triggers when context hits 80% of model limit.
+   - [ ] User-editable `profile.md` for tech stack and coding style preferences is loaded on every session.
+
+- [ ] **MCP Integration**:
+   - [ ] MCP client connects to at least GitHub and one custom tool server.
+   - [ ] New MCP servers can be added via config with no code changes.
+
+- [ ] **Git Integration**:
+   - [ ] Agent reads commit history and diffs natively.
+   - [ ] On-demand commit-level code review lists vulnerabilities and risky changes in CLI.
+
+- [ ] **The AI/ML components**:
+   - [ ] LLM model selection and configuration are documented.
+   - [ ] System prompt and user `profile.md` are version-controlled.
+   - [ ] API keys are stored securely in local config, never hardcoded.
+   - [ ] Rate limit handling and retry logic implemented for all providers.
+
+- [ ] **Quality & Open Source**:
+   - [ ] Test coverage for core agent loop, memory, and tool execution.
+   - [ ] Benchmarked against SWE-bench or equivalent to prove quality.
+   - [ ] Contributing guide and onboarding docs published in repo.
 
 ---
 
 ## 🔗 Repository Links
 
-TODO: Update with your repository structure
-
-1. [Main Repository](https://github.com/AOSSIE-Org/TODO)
-2. [Frontend](https://github.com/AOSSIE-Org/TODO/tree/main/frontend) (if separate)
-3. [Backend](https://github.com/AOSSIE-Org/TODO/tree/main/backend) (if separate)
+1. [Main Repository](https://github.com/AOSSIE-Org/CodingAgent)
+2. [GSoC 2026 Idea](https://github.com/AOSSIE-Org/Info/blob/main/GSoC-Ideas/2026/CodingAgent.md)
+3. [GSoC 2026 Index](https://github.com/AOSSIE-Org/Info/blob/main/GSoC-Ideas/2026/index.md)
 
 ---
 
 ## 🏗️ Architecture Diagram
 
-TODO: Add your system architecture diagram here
-
-```
-[Architecture Diagram Placeholder]
-```
-
-You can create architecture diagrams using:
-- [Draw.io](https://draw.io)
-- [Excalidraw](https://excalidraw.com)
-- [Lucidchart](https://lucidchart.com)
-- [Mermaid](https://mermaid.js.org) (for code-based diagrams)
-
-Example structure to include:
-- Frontend components
-- Backend services
-- Database architecture
-- External APIs/services
-- Data flow between components
+<img width="8192" height="2932" alt="MCP Tool Integration-2026-02-27-150404" src="https://github.com/user-attachments/assets/c5209990-4d56-4b47-817c-80e02c45f891" />
 
 ---
 
 ## 🔄 User Flow
 
-TODO: Add user flow diagrams showing how users interact with your application
-
-```
-[User Flow Diagram Placeholder]
-```
-
-### Key User Journeys
-
-TODO: Document main user flows:
-
-1. **User Journey 1**: Description
-   - Step 1
-   - Step 2
-   - Step 3
-
-2. **User Journey 2**: Description
-   - Step 1
-   - Step 2
-   - Step 3
-
-3. **User Journey 3**: Description
-   - Step 1
-   - Step 2
-   - Step 3
+<img width="5317" height="7584" alt="Coding Agent User Goal Fix Flow-2026-02-27-150630" src="https://github.com/user-attachments/assets/d6137ea3-34f4-40ef-a01b-380c12258392" />
 
 ---
 
 ## �🍀 Getting Started
 
-### Prerequisites
-
-TODO: List what developers need installed
-
-- Node.js 18+ / Python 3.9+ / Flutter SDK
-- npm / yarn / pnpm
-- [Any specific tools or accounts needed]
-
-### Installation
-
-TODO: Provide detailed setup instructions
-
-#### 1. Clone the Repository
-
-```bash
-git clone https://github.com/AOSSIE-Org/TODO.git
-cd TODO
-```
-
-#### 2. Install Dependencies
-
-```bash
-npm install
-# or
-yarn install
-# or
-pnpm install
-```
-
-#### 3. Configure Environment Variables(.env.example)
-
-Create a `.env` file in the root directory:
-
-```env
-# Add your environment variables here
-API_KEY=your_api_key
-DATABASE_URL=your_database_url
-```
-
-#### 4. Run the Development Server
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
-
-#### 5. Open your Browser
-
-Navigate to [http://localhost:3000](http://localhost:3000) to see the application.
-
-For detailed setup instructions, please refer to our [Installation Guide](./docs/INSTALL_GUIDE.md) (if you have one).
+To be added.
 
 ---
 
 ## 📱 App Screenshots
 
-TODO: Add screenshots showcasing your application
-
-|  |  |  |
-|---|---|---|
-| Screenshot 1 | Screenshot 2 | Screenshot 3 |
+To be added.
 
 ---
 
@@ -256,11 +188,7 @@ Thank you for considering contributing to this project! Contributions are highly
 ---
 
 ## ✨ Maintainers
-
-TODO: Add maintainer information
-
-- [Maintainer Name](https://github.com/username)
-- [Maintainer Name](https://github.com/username)
+- [Himanshu Poptani](https://github.com/coderwithsense)
 
 ---
 
@@ -273,8 +201,8 @@ See the [LICENSE](LICENSE) file for details.
 
 ## 💪 Thanks To All Contributors
 
-Thanks a lot for spending your time helping TODO grow. Keep rocking 🥂
+Thanks a lot for spending your time helping CodingAgent grow. Keep rocking 🥂
 
 [![Contributors](https://contrib.rocks/image?repo=AOSSIE-Org/TODO)](https://github.com/AOSSIE-Org/TODO/graphs/contributors)
 
-© 2025 AOSSIE 
+© 2026 AOSSIE 
