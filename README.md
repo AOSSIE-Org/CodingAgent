@@ -156,14 +156,18 @@
 ---
 
 ## 🏗️ Architecture Diagram
+<img width="1421" height="840" alt="image" src="https://github.com/user-attachments/assets/b4ad996c-4b6b-4bbf-8ff2-3176e74531bb" />
 
-<img width="8192" height="2932" alt="MCP Tool Integration-2026-02-27-150404" src="https://github.com/user-attachments/assets/c5209990-4d56-4b47-817c-80e02c45f891" />
+
+
 
 ---
 
 ## 🔄 User Flow
 
-<img width="5317" height="7584" alt="Coding Agent User Goal Fix Flow-2026-02-27-150630" src="https://github.com/user-attachments/assets/d6137ea3-34f4-40ef-a01b-380c12258392" />
+<img width="842" height="1400" alt="image" src="https://github.com/user-attachments/assets/ff21d3fd-f6be-4f55-a9a5-ed61f75b95d7" />
+
+
 
 ---
 
